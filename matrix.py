@@ -25,14 +25,18 @@ def make_scale( x, y, z ):
     matrix[3][3] = 1
     return matrix
 
-def make_rotX( theta ):
-    pass
+def make_rotX( theta ): # theta will be in degree input
+    theta = theta / 180.0 * math.pi
 
-def make_rotY( theta ):
-    pass
+def make_rotY( theta ): # theta will be in degree input
+    matrix = new_matrix(0, 0)
+    theta = theta / 180.0 * math.pi
+    add_edge(matrix, math.cos(theta), 0, -math.sin(theta), 0, 1, 0)
+    add_edge(matrix, math.sin(theta), 0, math.cos(theta), 0, 0, 0)
+    return matrix
 
-def make_rotZ( theta ):
-    pass
+def make_rotZ( theta ): # theta will be in degree input
+    theta = theta / 180.0 * math.pi
 
 #print the matrix such that it looks like
 #the template in the top comment
