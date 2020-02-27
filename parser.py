@@ -32,4 +32,17 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
-    pass
+    f = open(fname, "r")
+    if (f.mode == "r"):
+        line = f.readlines()
+        print(line)
+        if (line.find("line") >= 0):
+            args = f.readlines()
+            coordinates = args.split(" ")
+            add_edge(points, coordinates[0], coordinates[1], coordinates[2], coordinates[3], coordinates[4], coordinates[5])
+        elif (line.find("ident") >= 0):
+            ident(points)
+        elif (line.find("scale") >= 0):
+            args = f.readlines()
+            scalars = args.split(" ")
+            make_scale(scalars[0], scalars[1], scalars[2])
