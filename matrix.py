@@ -26,17 +26,49 @@ def make_scale( x, y, z ):
     return matrix
 
 def make_rotX( theta ): # theta will be in degree input
-    theta = theta / 180.0 * math.pi
+    matrix = new_matrix()
+    radians = theta / 180.0 * math.pi
+    costheta = math.cos(radians)
+    sintheta = math.sin(radians)
+    matrix[0][0] = 1
+    matrix[1][1] = costheta
+    matrix[1][2] = sintheta
+    matrix[2][1] = - sintheta
+    matrix[2][2] = costheta
+    matrix[3][3] = 1
+    # add_edge(matrix, 1, 0, 0, 0, math.cos(radians), math.sin(radians))
+    # add_edge(matrix, 0, -math.sin(radians), math.cos(radians), 0, 0, 0)
+    return matrix
 
 def make_rotY( theta ): # theta will be in degree input
-    matrix = new_matrix(0, 0)
-    theta = theta / 180.0 * math.pi
-    add_edge(matrix, math.cos(theta), 0, -math.sin(theta), 0, 1, 0)
-    add_edge(matrix, math.sin(theta), 0, math.cos(theta), 0, 0, 0)
+    matrix = new_matrix()
+    radians = theta / 180.0 * math.pi
+    costheta = math.cos(radians)
+    sintheta = math.sin(radians)
+    matrix[0][0] = costheta
+    matrix[1][1] = 1
+    matrix[2][2] = costheta
+    matrix[3][3] = 1
+    matrix[0][2] = - sintheta
+    matrix[2][0] = sintheta
+    # add_edge(matrix, math.cos(radians), 0, -math.sin(radians), 0, 1, 0)
+    # add_edge(matrix, math.sin(radians), 0, math.cos(radians), 0, 0, 0)
     return matrix
 
 def make_rotZ( theta ): # theta will be in degree input
-    theta = theta / 180.0 * math.pi
+    matrix = new_matrix()
+    radians = theta / 180.0 * math.pi
+    costheta = math.cos(radians)
+    sintheta = math.sin(radians)
+    matrix[0][0] = costheta
+    matrix[1][1] = costheta
+    matrix[2][2] = 1
+    matrix[3][3] = 1
+    matrix[0][1] = sintheta
+    matrix[1][0] = - sintheta
+    # add_edge(matrix, math.cos(radians), math.sin(radians), 0, -math.sin(radians), math.cos(radians), 0)
+    # add_edge(matrix, 0, 0, 1, 0, 0, 0)
+    return matrix
 
 #print the matrix such that it looks like
 #the template in the top comment
