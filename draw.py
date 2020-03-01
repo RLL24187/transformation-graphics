@@ -50,14 +50,14 @@ def draw_line( x0, y0, x1, y1, screen, color ):
             d = A + B/2
 
             while x < x1:
-                plot(screen, color, x, y)
+                plot(screen, color, int(x), int(y))
                 if d > 0:
                     y+= 1
                     d+= B
                 x+= 1
                 d+= A
             #end octant 1 while
-            plot(screen, color, x1, y1)
+            plot(screen, color, int(x1), int(y1))
         #end octant 1
 
         #octant 8
@@ -65,14 +65,14 @@ def draw_line( x0, y0, x1, y1, screen, color ):
             d = A - B/2
 
             while x < x1:
-                plot(screen, color, x, y)
+                plot(screen, color, int(x), int(y))
                 if d < 0:
                     y-= 1
                     d-= B
                 x+= 1
                 d+= A
             #end octant 8 while
-            plot(screen, color, x1, y1)
+            plot(screen, color, int(x1), int(y1))
         #end octant 8
     #end octants 1 and 8
 
@@ -83,14 +83,14 @@ def draw_line( x0, y0, x1, y1, screen, color ):
             d = A/2 + B
 
             while y < y1:
-                plot(screen, color, x, y)
+                plot(screen, color, int(x), int(y))
                 if d < 0:
                     x+= 1
                     d+= A
                 y+= 1
                 d+= B
             #end octant 2 while
-            plot(screen, color, x1, y1)
+            plot(screen, color, int(x1), int(y1))
         #end octant 2
 
         #octant 7
@@ -98,14 +98,14 @@ def draw_line( x0, y0, x1, y1, screen, color ):
             d = A/2 - B;
 
             while y > y1:
-                plot(screen, color, x, y)
+                plot(screen, color, int(x), int(y))
                 if d > 0:
                     x+= 1
                     d+= A
                 y-= 1
                 d-= B
             #end octant 7 while
-            plot(screen, color, x1, y1)
+            plot(screen, color, int(x1), int(y1))
         #end octant 7
     #end octants 2 and 7
 #end draw_line

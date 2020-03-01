@@ -12,9 +12,9 @@ import math
 def make_translate( x, y, z ):
     matrix = new_matrix(4, 4)
     ident(matrix)
-    matrix[0][3] = x
-    matrix[1][3] = y
-    matrix[2][3] = z
+    matrix[3][0] = x
+    matrix[3][1] = y
+    matrix[3][2] = z
     return matrix
 
 def make_scale( x, y, z ):
@@ -33,7 +33,7 @@ def make_rotX( theta ): # theta will be in degree input
     matrix[0][0] = 1
     matrix[1][1] = costheta
     matrix[1][2] = sintheta
-    matrix[2][1] = - sintheta
+    matrix[2][1] = -1 * sintheta
     matrix[2][2] = costheta
     matrix[3][3] = 1
     # add_edge(matrix, 1, 0, 0, 0, math.cos(radians), math.sin(radians))
@@ -49,7 +49,7 @@ def make_rotY( theta ): # theta will be in degree input
     matrix[1][1] = 1
     matrix[2][2] = costheta
     matrix[3][3] = 1
-    matrix[0][2] = - sintheta
+    matrix[0][2] = -1 * sintheta
     matrix[2][0] = sintheta
     # add_edge(matrix, math.cos(radians), 0, -math.sin(radians), 0, 1, 0)
     # add_edge(matrix, math.sin(radians), 0, math.cos(radians), 0, 0, 0)
@@ -65,7 +65,7 @@ def make_rotZ( theta ): # theta will be in degree input
     matrix[2][2] = 1
     matrix[3][3] = 1
     matrix[0][1] = sintheta
-    matrix[1][0] = - sintheta
+    matrix[1][0] = -1 * sintheta
     # add_edge(matrix, math.cos(radians), math.sin(radians), 0, -math.sin(radians), math.cos(radians), 0)
     # add_edge(matrix, 0, 0, 1, 0, 0, 0)
     return matrix

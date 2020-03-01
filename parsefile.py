@@ -36,51 +36,72 @@ def parse_file( fname, points, transform, screen, color ):
     if (f.mode == "r"):
         line = f.readline()
         while(line):
-            print('"' + line.strip() + '"')
+            # print('"' + line.strip() + '"')
             if (line == "line\n"):
                 args = f.readline()
+                # print(args)
                 coordinates = args.split(" ")
-                coordinates[5] = str(coordinates[5].strip())
                 # print(coordinates)
+                coordinates[5] = coordinates[5].strip()
+                for x in range (len(coordinates)):
+                    coordinates[x] = int(coordinates[x].strip())
                 add_edge(points, coordinates[0], coordinates[1], coordinates[2], coordinates[3], coordinates[4], coordinates[5])
                 # print_matrix(points)
             elif (line == "ident\n"):
                 ident(transform)
-                print_matrix(transform)
+                # print_matrix(transform)
             elif (line == "scale\n"):
                 args = f.readline()
                 scalars = args.split(" ")
                 scalars[2] = str(scalars[2].strip())
-                for x in range (3):
+                for x in range (len(scalars)):
                     scalars[x] = int(scalars[x])
-                print(scalars)
+                # print(scalars)
                 scale_matrix = make_scale(scalars[0], scalars[1], scalars[2])
-                print_matrix(scale_matrix)
+                # print_matrix(scale_matrix)
                 matrix_mult(scale_matrix, transform)
-                print_matrix(transform)
+                # print_matrix(transform)
             elif (line == "move\n"):
                 args = f.readline()
                 units = args.split(" ")
                 units[2] = str(units[2].strip())
-                for x in range (3):
+                for x in range (len(units)):
                     units[x] = int(units[x])
-                print(units)
+                # print(units)
                 translate_matrix = make_translate(units[0], units[1], units[2])
-                print_matrix(translate_matrix)
+                # print_matrix(translate_matrix)
                 matrix_mult(translate_matrix, transform)
-                print_matrix(transform)
+                # print_matrix(transform)
             elif (line == "rotate\n"):
                 args = f.readline()
                 split_args = args.split(" ")
                 theta = int(split_args[1].strip())
-                print(split_args)
+                # print(split_args)
                 if (split_args[0] == "x"):
                     rotate_matrix = make_rotX(theta)
                 elif (split_args[0] == "y"):
                     rotate_matrix = make_rotY(theta)
                 elif (split_args[0] == "z"):
                     rotate_matrix = make_rotZ(theta)
-                print_matrix(rotate_matrix)
+                # print_matrix(rotate_matrix)
                 matrix_mult(rotate_matrix, transform)
-                print_matrix(transform)
+                # print_matrix(transform)
+            elif (line == "apply\n"):
+                matrix_mult(transform, points)
+
+            elif (line == "display\n"):
+                # print_matrix(points)
+                clear_screen(screen)
+                draw_lines(points, screen, color)
+                # display(screen)
+
+            elif (line == "save\n"):
+                clear_screen(screen)
+                draw_lines(points, screen, color)
+                save_ppm(screen, "image.ppm")
+                save_extension(screen, line)
+
+            elif (line == "quit\n"):
+                line = None
             line = f.readline()
+    f.close()
