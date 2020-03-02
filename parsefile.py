@@ -93,7 +93,7 @@ def parse_file( fname, points, transform, screen, color ):
                 # print_matrix(points)
                 clear_screen(screen)
                 draw_lines(points, screen, color)
-                # display(screen)
+                display(screen)
 
             elif (line == "save\n"):
                 clear_screen(screen)
