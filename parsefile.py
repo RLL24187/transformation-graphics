@@ -99,7 +99,8 @@ def parse_file( fname, points, transform, screen, color ):
                 clear_screen(screen)
                 draw_lines(points, screen, color)
                 save_ppm(screen, "image.ppm")
-                save_extension(screen, line)
+                line = f.readline()
+                save_extension(screen, line.strip())
 
             elif (line == "quit\n"):
                 line = None
